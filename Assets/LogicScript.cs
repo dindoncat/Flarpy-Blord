@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using AppsFlyerSDK;
 
 public class LogicScript : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class LogicScript : MonoBehaviour
     public Text scoreText;
     public GameObject gameOverScreen;
     public GameObject startGameScreen;
+
 
     [ContextMenu("Increase Score")]
 
@@ -21,15 +21,13 @@ public class LogicScript : MonoBehaviour
         scoreText.text = playerScore.ToString();
     }
 
+    public void startGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void restartGame()
     {
-        Dictionary<string, string> eventValues = new Dictionary<string, string>();
-        eventValues.Add(AFInAppEvents.CURRENCY, "USD");
-        eventValues.Add(AFInAppEvents.REVENUE, "0.99");
-        eventValues.Add("af_quantity", "1");
-        AppsFlyer.sendEvent(AFInAppEvents.PURCHASE, eventValues);
-
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     } 
     public void gameOver()
